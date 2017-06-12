@@ -43,7 +43,7 @@ public class CsvApplication extends Application implements CsvUi {
 			try {
 				reader.run(f);
 			} catch (final Exception e) {
-				throw new RuntimeException();
+				throw new RuntimeException(e);
 			}
 		}).start();
 	}
