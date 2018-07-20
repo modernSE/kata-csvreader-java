@@ -13,18 +13,15 @@ public class CsvReader {
 	private CsvUi csvUi;
 
 	public void run(final File csvFile) throws Exception {
-		try {
-			Scanner sc = new Scanner(csvFile);
-			
+
+		try (Scanner sc = new Scanner(csvFile)) {
 			while (sc.hasNextLine()) {
 				String line = sc.nextLine();
 				List<String> data = Arrays.asList(line.split(","));
 				csvUi.setColumnCount(data.size());
-				
+
 				csvUi.addRow(data);
 			}
-
-			sc.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
