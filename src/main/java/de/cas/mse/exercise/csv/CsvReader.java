@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 import de.cas.mse.exercise.csv.impl.CsvRow;
-import de.cas.mse.exercise.csv.impl.FileInformation;
+import de.cas.mse.exercise.csv.impl.FileData;
 import de.cas.mse.exercise.csv.ui.CsvUi;
 import de.cas.mse.exercise.csv.ui.Filterable;
 
@@ -20,33 +20,37 @@ public class CsvReader implements Filterable {
 	private CsvUi csvUi;
 
 	public void run(final File csvFile) throws Exception {
-		FileInformation fileInformation = readFile(csvFile);
-		setUpUIData(fileInformation);
-		
-		
+		FileData fileInformation = readFile(csvFile);
+		setUpUIData(fileInformation);		
 	}
 	
-	private void setUpUIData(FileInformation fileInfo) {
-		List<String> headerCells = getHeaderCells(fileInfo);
-		if (headerCells != null) {
-			
-			for (String header : headerCells) {
-				csvUi.addColumn(header);
-			}
-			
-			for (int rowNumber = 1; rowNumber < fileInfo.getRows().size(); rowNumber++) {
-				csvUi.addRow(fileInfo.getRows().get(rowNumber).getCells());
-			}
+	private void setUpUIData(FileData fileInfo) {
+		setUpHeaderData(fileInfo);			
+		setUpBodyData(fileInfo);
+	}
+	
+	private void setUpHeaderData(FileData fileData) {
+		for (String headerCell : getHeaderCells(fileData)) {
+			csvUi.addColumn(headerCell);
 		}
 	}
 	
-	private List<String> getHeaderCells(FileInformation fileInfo) {
+	private void setUpBodyData(FileData fileData) {
+		for (CsvRow row : getBodyRows(fileData)) {
+			csvUi.addRow(row.getCells());
+		}
+	}
+	
+	private List<String> getHeaderCells(FileData fileInfo) {
 		return fileInfo.getRows().get(0).getCells();
 	}
 	
+	private List<CsvRow> getBodyRows(FileData fileData) {
+		return fileData.getRows().subList(1, fileData.getRows().size() - 1);
+	}
 	
 	
-	private FileInformation readFile(final File csvFile) throws IOException {
+	private FileData readFile(final File csvFile) throws IOException {
 		
 		BufferedReader reader = new BufferedReader(new FileReader(csvFile));
 		List<CsvRow> rows = new ArrayList<CsvRow>();
@@ -70,7 +74,7 @@ public class CsvReader implements Filterable {
 			reader.close();
 		}
 		
-		return new FileInformation(rows, columnCount);
+		return new FileData(rows, columnCount);
 	}
 	
 	public void setCsvUi(final CsvUi csvUi) {
