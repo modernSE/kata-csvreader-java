@@ -4,46 +4,53 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import de.cas.mse.exercise.csv.ui.CsvUi;
 
 public class CsvReader {
-	
+
 	private CsvUi csvUi;
 
 	public void run(final File csvFile) throws Exception {
 		BufferedReader br = new BufferedReader(new FileReader(csvFile));
 		try {
 			FileObject csvFileInfo = createFileObject(br);
+
+			for (String caption : csvFileInfo.csvRows.get(0).rowData) {
+				csvUi.addColumn(caption);
+			}
 			
-		} catch(Exception e) {
+			for (CsvRow row : csvFileInfo.csvRows) {
+				csvUi.addRow(Arrays.asList(row.rowData));
+			}
 			
+
+		} catch (Exception e) {
+
 		} finally {
 			br.close();
 		}
-		
-		
+
 	}
-	
+
 	public void setCsvUi(final CsvUi csvUi) {
 		this.csvUi = csvUi;
 	}
-	
-	private FileObject createFileObject(BufferedReader br) throws IOException  {
-	    StringBuilder sb = new StringBuilder();
+
+	private FileObject createFileObject(BufferedReader br) throws IOException {
+		StringBuilder sb = new StringBuilder();
 		String line = br.readLine();
-		FileObject fileObject = new FileObject();
-		
 
-	    while (line != null) {
-	    	CsvRow row = new CsvRow(line.split(","));
-	    
-	    	sb.append(System.lineSeparator());
-	        line = br.readLine();
-	    }
+		List<CsvRow> allRows = new ArrayList<>();
 
-		
-		return fileObject;
+		while (line != null) {
+			allRows.add(new CsvRow(line.split(",")));
+			line = br.readLine();
+		}
+		return new FileObject(allRows);
 	}
 
 }
