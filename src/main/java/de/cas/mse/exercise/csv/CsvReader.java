@@ -29,16 +29,21 @@ public class CsvReader {
 
 		List<CharRow> rows = lines.stream() //
 				.map(this::splitLineIntoCells) //
-				.map(x -> new CharRow(x)).collect(Collectors.toList());
+				.map(x -> new CharRow(x)) //
+				.collect(Collectors.toList());
 
 		if (rows.isEmpty()) {
 			throw new IllegalArgumentException("File is empty");
 		}
-		
+
 		CharRow headerRow = extractHeaderRowAndRemoveFromBody(rows);
 		FileData fileData = new FileData(headerRow.getCells(), rows);
 
 		return fileData;
+	}
+
+	private List<String> splitLineIntoCells(String line) {
+		return Arrays.asList(line.split(",", 0));
 	}
 
 	private CharRow extractHeaderRowAndRemoveFromBody(List<CharRow> rows) {
@@ -46,19 +51,10 @@ public class CsvReader {
 		rows.remove(0);
 		return header;
 	}
-	
-	private List<String> splitLineIntoCells(String line) {
-		return Arrays.asList(line.split(",", 0));
-	}
 
 	private void setUiData(FileData fileData) {
-		for (String header : fileData.getColumnHeaders()) {
-			csvUi.addColumn(header);
-		}
-
-		for (CharRow row : fileData.getRows()) {
-			csvUi.addRow(row.getCells());
-		}
+		fileData.getColumnHeaders().forEach(header -> csvUi.addColumn(header));
+		fileData.getRows().forEach(row -> csvUi.addRow(row.getCells()));
 	}
 
 }
