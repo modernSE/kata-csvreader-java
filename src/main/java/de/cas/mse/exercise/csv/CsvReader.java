@@ -24,6 +24,7 @@ public class CsvReader {
 			}
 			
 			for (CsvRow row : csvFileInfo.csvRows) {
+				if(csvFileInfo.csvRows.indexOf(row) != 0)
 				csvUi.addRow(Arrays.asList(row.rowData));
 			}
 			
@@ -41,7 +42,6 @@ public class CsvReader {
 	}
 
 	private FileObject createFileObject(BufferedReader br) throws IOException {
-		StringBuilder sb = new StringBuilder();
 		String line = br.readLine();
 
 		List<CsvRow> allRows = new ArrayList<>();
