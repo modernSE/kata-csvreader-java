@@ -17,11 +17,11 @@ public class CsvReader implements Filterable{
 
 	public void run(final File csvFile) throws Exception {
 		List<String> headers = getHeaders(csvFile);
-		rows = getRows(csvFile);
-		for(String caption : headers) {
+		rows = getRows(csvFile);//with or without headers?
+		for(String caption : headers) {//new method "addHeader", inconsistent naming headers vs caption
 			csvUi.addColumn(caption);
 		}
-		for(List<String> row : rows) {
+		for(List<String> row : rows) {//new method
 			csvUi.addRow(row);
 		}
 	}
@@ -29,12 +29,12 @@ public class CsvReader implements Filterable{
 	private List<List<String>> getRows(final File csvFile) throws FileNotFoundException {
 		Scanner csvScanner = new Scanner(csvFile);
 		List<List<String>> rows = new ArrayList<List<String>>();
-		csvScanner.nextLine();
+		csvScanner.nextLine();//seems arbitrary (does not do what the method name says)
 		while(csvScanner.hasNext()) {
 			List<String> row = getNextRow(csvScanner);
 			rows.add(row);
 		}
-		csvScanner.close();
+		csvScanner.close(); // try with auto close
 		return rows;
 	}
 
@@ -57,7 +57,7 @@ public class CsvReader implements Filterable{
 	public List<List<String>> filter(int col, String word) {
 		List<List<String>> filteredRows = new ArrayList<List<String>>();
 		for(List<String> row : rows) {
-			if(row.get(col - 1).contains(word)) {
+			if(row.get(col - 1).contains(word)) {//better readability with "cellContains"-method
 				filteredRows.add(row);
 			}
 		}
