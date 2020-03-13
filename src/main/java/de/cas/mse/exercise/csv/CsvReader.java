@@ -16,9 +16,11 @@ public class CsvReader {
 	public void run(final File csvFile) throws Exception {
 		List<List<String>> csvRows = readCSV(csvFile, ",");
 		
+		//könnte in eigene Methode ausgelagert werden, um künftige Anpassungen an den Headern zu erleichtern
 		List<String> csvHeader = csvRows.get(0);
 		addHeaderCaptions(csvHeader);
 		
+		//wie oben, nur für den content
 		List<List<String>> csvContents = csvRows.subList(1, csvRows.size());
 		addRowContents(csvContents);
 	}
