@@ -5,15 +5,17 @@ import java.io.File;
 import de.cas.mse.exercise.csv.ui.CsvUi;
 
 public class CsvReader {
+	private CsvUiHandler csvUiHandler = new CsvUiHandler();
 	
-	private CsvUi csvUi;
-
 	public void run(final File csvFile) throws Exception {
-		// TODO: Start coding here
+		CsvFileHandler fileHandler = new CsvFileHandler(csvFile, ",");
+		CsvFileData fileData = fileHandler.getFileContentWithHeaders();
+		csvUiHandler.addCsvFileDataToUi(fileData);
 	}
 	
 	public void setCsvUi(final CsvUi csvUi) {
-		this.csvUi = csvUi;
+		csvUiHandler.setCsvUi(csvUi);
+		
 	}
 
 }
