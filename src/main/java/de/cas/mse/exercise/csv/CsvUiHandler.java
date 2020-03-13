@@ -2,7 +2,7 @@ package de.cas.mse.exercise.csv;
 
 import de.cas.mse.exercise.csv.ui.CsvUi;
 
-public class CsvUiHandler {
+public class CsvUiHandler { // imo unneeded wrapper class
 	private CsvUi csvUi;
 	
 	

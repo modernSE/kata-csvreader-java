@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvFileData {
-	private List<String> headers = new ArrayList<String>();
-	private List<List<String>> content = new ArrayList<List<String>>();
+	private List<String> headers = new ArrayList<String>(); // could be public 
+	private List<List<String>> content = new ArrayList<List<String>>(); // could be public
 	
 	
 	

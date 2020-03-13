@@ -9,30 +9,30 @@ import java.util.List;
 public class CsvFileHandler {
 	private File csvFile;
 	private String tokenDelimiter;
-	
+
 	CsvFileHandler(File csvFile, String tokenDelimiter) {
 		this.csvFile = csvFile;
 		this.tokenDelimiter = tokenDelimiter;
 	}
-	
+
 	CsvFileData getFileContentWithHeaders() throws IOException {
 		List<String> contentLines = Files.readAllLines(csvFile.toPath());
 		CsvFileData csvFileData = new CsvFileData();
-		
-		for(int i = 0; i< contentLines.size(); i++) {
+
+		for (int i = 0; i < contentLines.size(); i++) {
 			String rowContent = contentLines.get(i);
 			List<String> rowTokens = splitRowToToken(rowContent);
-			if(i == 0) {
+			if (i == 0) {
 				csvFileData.addHeaders(rowTokens);
-			}else {
+			} else {
 				csvFileData.addContent(rowTokens);
 			}
 		}
-		
+
 		return csvFileData;
 	}
-	
-	private List<String> splitRowToToken(String rowContent){
+
+	private List<String> splitRowToToken(String rowContent) {
 		return Arrays.asList(rowContent.split(tokenDelimiter));
 	}
 
