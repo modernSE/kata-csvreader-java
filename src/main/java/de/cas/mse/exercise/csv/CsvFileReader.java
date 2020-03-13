@@ -22,6 +22,7 @@ public class CsvFileReader {
 		}
 	}
 
+	// this method is not necessary --> use readRow()
 	private List<String> readHeader(Scanner scanner) {
 		return readRow(scanner);
 	}
@@ -29,7 +30,7 @@ public class CsvFileReader {
 	private List<List<String>> readContentRows(Scanner scanner) {
 		List<List<String>> rows = new LinkedList<List<String>>();
 		while (scanner.hasNextLine()) {
-			rows.add(readHeader(scanner));
+			rows.add(readHeader(scanner)); // name not correct: doesn't read header but row in general
 		}
 		return rows;
 	}

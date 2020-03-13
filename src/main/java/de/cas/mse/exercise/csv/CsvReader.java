@@ -16,12 +16,17 @@ public class CsvReader {
 		displayContent(content);
 	}
 
+	public void setCsvUi(final CsvUi csvUi) {
+		this.csvUi = csvUi;
+	}
+
 	private CsvContent readCsvContent(final File csvFile) throws FileNotFoundException {
-		CsvFileReader reader = new CsvFileReader(SEPERATOR);
-		CsvContent content = reader.readContent(csvFile);
+		CsvFileReader reader = new CsvFileReader(SEPERATOR); // nice splitting!
+		CsvContent content = reader.readContent(csvFile);  // good: own data type
 		return content;
 	}
 	
+	// not correct; doesn't actually display content
 	private void displayContent(CsvContent content) {
 		setColumnHeaders(content);
 		displayRows(content);
@@ -37,10 +42,6 @@ public class CsvReader {
 		for (String columnHeader : content.getHeader()) {
 			csvUi.addColumn(columnHeader);
 		}
-	}
-
-	public void setCsvUi(final CsvUi csvUi) {
-		this.csvUi = csvUi;
 	}
 
 }
