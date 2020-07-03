@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="CsvStarter - Input 1 - No header" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="de.cas.mse.exercise.csv.CsvStarter" />
-    <module name="csv" />
+    <module name="kata-csvreader-java" />
     <option name="PROGRAM_PARAMETERS" value="./samples/input-1-no-header.csv" />
     <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
     <method v="2">
