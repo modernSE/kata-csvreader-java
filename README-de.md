@@ -3,17 +3,18 @@ Clean Code Kata
 
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/modernSE/kata-csvreader-java) 
 
-Under the path `/samples` you can find CSV-Files, which we want to read in and display to the user.
-A very kind front-end-team has already implemented two user interfaces for us, yay =)
-Our job now is to breathe in some life to the GUI with the contents of the CSV-files.
+Unter `/samples` findet ihr Beispiel CSV-Dateien, die wir Einlesen und Anzeigen wollen.
+Ein liebes Front-End-Team hat dies bereits vorab implementiert und uns zwei Interfaces bereitgestellt.
+Unsere Aufgabe ist es nun die GUI mit Inhalten zu füllen, diese Inhalten müssen wir aus den CSV-Dateien lesen.
 
-For the sake of simlicity and educational character of this exercise we can assume well formed CSV-Files. Our goal is **not** to create a perfect almighty CSV-Reader!
+Wir gehen von validen schönen CSV-Dateien aus. Ziel ist es nicht den prefekten und robustesten CSV-Reader zu schreiben!
 
+## Aufgabe 1 - CSV-Datei ohne Spaltenüberschriften
+Eingabedatei: input-1-no-header.csv
 
-## Task 1 - Read and display a CSV-File without column headers
-Input file: input-1-no-header.csv
+Aufgabe: Die CSV-Datei ohne Spaltenüberschriften importieren.
 
-For this task relevant GUI-APIs:
+Dafür relevante API-Funktionen:
 ```java
 public interface CsvUi {
 
@@ -37,10 +38,12 @@ public interface CsvUi {
 }
 ```
 
-## Task 2 - Read and display a CSV-File with column headers
-Input file: input-2-with-header.csv
+## Aufgabe 2 - CSV-Datei mit Spaltenüberschriften
+Eingabedatei: input-2-with-header.csv
 
-For this task relevant GUI-APIs:
+Aufgabe: Die CSV-Datei mit Spaltenüberschriften importieren.
+
+Dafür relevante API-Funktionen:
 ```java
 public interface CsvUi {
 
@@ -68,12 +71,12 @@ public interface CsvUi {
 }
 ```
 
-## Task 3 - Read, display and filter a CSV-File with column headers
-Input file: input-2-with-header.csv
+## Aufgabe 3 - CSV-Datei mit Spaltenüberschriften filtern
+Eingabedatei: input-2-with-header.csv
 
-Hint: Your `CsvReader` class needs to implement the provided and untouchable interface `Filterable`.
+Aufgabe: Die CSV-Datei mit Spaltenüberschriften importieren und das neue Interface `Filterable` implementieren.
 
-For this task relevant GUI-APIs:
+Dafür relevante API-Funktionen:
 ```java
  
 /**
