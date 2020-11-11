@@ -12,7 +12,8 @@ import de.cas.mse.exercise.csv.ui.Filterable;
 public class CsvReader implements Filterable {
 
     private CsvUi csvUi;
-    private List<List<String>> data;
+    private List<String> headers;
+    private List<List<String>> rows;
 
     public void run(final File csvFile) throws Exception {
         List<String> allLines = Files.readAllLines(csvFile.toPath());
@@ -20,16 +21,10 @@ public class CsvReader implements Filterable {
             return;
         }
 
-        addHeadersToUi(parseLine(allLines.get(0)));
-        data = allLines.stream().skip(1).map(this::parseLine).collect(Collectors.toList());
-    }
+        headers = parseLine(allLines.get(0));
+        rows = getRows(allLines);
 
-    private List<String> parseLine(String line) {
-        return Arrays.asList(line.split(","));
-    }
-
-    private void addHeadersToUi(List<String> headers) {
-        headers.forEach(csvUi::addColumn);
+        render();
     }
 
     public void setCsvUi(final CsvUi csvUi) {
@@ -37,12 +32,28 @@ public class CsvReader implements Filterable {
     }
 
     @Override
-    public List<List<String>> filter(int col, String word) {
-        return data.stream().filter(row -> filterApplies(row, col, word)).collect(Collectors.toList());
+    public List<List<String>> filter(int columnIndexForFiltering, String wordToContain) {
+        String filterRegex = String.format(".*\\b%s\\b.*", wordToContain);
+        return rows.stream()
+            .filter(row -> filterApplies(row, columnIndexForFiltering, filterRegex))
+            .collect(Collectors.toList());
     }
 
-    private boolean filterApplies(List<String> row, int col, String word) {
-        return row.get(col).matches(String.format(".*\\b%s\\b.*", word));
+    private List<List<String>> getRows(List<String> allLines) {
+        // First line contains the header
+        return allLines.stream().skip(1).map(this::parseLine).collect(Collectors.toList());
     }
 
+    private List<String> parseLine(String line) {
+        return Arrays.asList(line.split(","));
+    }
+
+    private void render() {
+        headers.forEach(csvUi::addColumn);
+        rows.forEach(csvUi::addRow);
+    }
+
+    private boolean filterApplies(List<String> row, int columnIndexForFiltering, String filterRegex) {
+        return row.get(columnIndexForFiltering).matches(filterRegex);
+    }
 }
