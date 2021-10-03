@@ -1,2 +1,7 @@
+
 tasks:
   - init: mvn install -DskipTests=false
+
+vscode:
+  extensions:
+    - vscjava.vscode-java-pack
