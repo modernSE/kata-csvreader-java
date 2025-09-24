@@ -1,30 +1,28 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "java",
-            "name": "Launch with input-1-no-header.csv",
-            "request": "launch",
-            "mainClass": "de.cas.mse.exercise.csv.CsvStarterConsole",
-            "projectName": "csv",
-            "args": "samples/input-1-no-header.csv"
-        },{
-            "type": "java",
-            "name": "Launch with input-2-with-header.csv",
-            "request": "launch",
-            "mainClass": "de.cas.mse.exercise.csv.CsvStarterConsole",
-            "projectName": "csv",
-            "args": "samples/input-2-with-header.csv"
-        },{
-            "type": "java",
-            "name": "Launch with input-3-big-file.csv",
-            "request": "launch",
-            "mainClass": "de.cas.mse.exercise.csv.CsvStarterConsole",
-            "projectName": "csv",
-            "args": "samples/input-3-big-file.csv"
-        }
-    ]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  "version": "0.2.0",
+  "configurations": [
+      {
+          "type": "java",
+          "name": "Run CsvReader - No Headers",
+          "request": "launch",
+          "mainClass": "de.cas.mse.exercise.csv.CsvStarterConsole",
+          "args": "./samples/input-1-no-header.csv"
+      },
+      {
+          "type": "java",
+          "name": "Run CsvReader - Headers",
+          "request": "launch",
+          "mainClass": "de.cas.mse.exercise.csv.CsvStarterConsole",
+          "args": "./samples/input-2-with-header.csv"
+      },
+      {
+          "type": "java",
+          "name": "Run CsvReader - Big File",
+          "request": "launch",
+          "mainClass": "de.cas.mse.exercise.csv.CsvStarterConsole",
+          "args": "./samples/input-3-big-file.csv"
+      }
+  ]
 }

@@ -1,8 +1,6 @@
 # CsvReader-Kata
 Clean Code Kata
 
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/modernSE/kata-csvreader-java) 
-
 Unter `/samples` findet ihr Beispiel CSV-Dateien, die wir Einlesen und Anzeigen wollen.
 Ein liebes Front-End-Team hat dies bereits vorab implementiert und uns zwei Interfaces bereitgestellt.
 Unsere Aufgabe ist es nun die GUI mit Inhalten zu füllen, diese Inhalten müssen wir aus den CSV-Dateien lesen.
